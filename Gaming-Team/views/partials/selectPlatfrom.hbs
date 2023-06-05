@@ -1,0 +1,5 @@
+<select id="platform" name="selectPlatfrom">
+    {{#each selectedPlatforms}}
+    <option value="{{value}}" {{#if isSelected}}selected{{/if}}>{{label}}</option>
+    {{/each}}
+</select>
