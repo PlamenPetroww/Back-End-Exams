@@ -1,0 +1,37 @@
+const mongoose = require('mongoose');
+
+const photoSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true,
+    },
+    image: {
+        type: String,
+        required: true,
+        validate: /^https?:\/\//,
+    },
+    age: {
+        type: Number,
+        required: true,
+    },
+    description: {
+        type: String,
+        required: true,
+    },
+    location: {
+        type: String,
+        required: true,
+    },
+    owner: {
+        type: mongoose.Types.ObjectId,
+        ref: 'User',
+    },
+    commentList: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'User',
+    }]
+});
+
+const Pet = mongoose.model('Pets', photoSchema);
+
+module.exports = Pet;
