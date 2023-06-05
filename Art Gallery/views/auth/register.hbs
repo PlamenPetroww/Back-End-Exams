@@ -1,0 +1,24 @@
+<main>
+    <div class="register-box">
+        <h1>Register</h1>
+        <h4>It's free and only take a minute</h4>
+        {{!-- delete action and add method POST--}}
+        <form method="POST">
+            <label>Username</label>
+            {{!-- check ob is name, or email, or whatever --}}
+            <input type="text" name="username" placeholder="Username..">
+            <label>Email</label>
+            {{!-- check for email --}}
+            <input type="text" name="email" placeholder="Email..">
+            <label>Password</label>
+            {{!-- check for password --}}
+            <input type="password" name="password" placeholder="Password..">
+            <label>Confirm Password</label>
+            {{!-- check for repeatPassword --}}
+            <input type="password" name="repeatPassword" placeholder="Confirm Password..">
+            <input type="submit" value="Submit">
+        </form>
+        {{!-- add routes for a href --}}
+        <p>Already have an account? <a href="/login">Login here</a></p>
+    </div>
+</main>

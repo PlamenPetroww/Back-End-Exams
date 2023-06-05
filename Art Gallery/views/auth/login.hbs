@@ -1,0 +1,17 @@
+<main>
+    <div class="login-box">
+        <h1>Login</h1>
+        {{!-- Remove actions and add method --}}
+        <form method="POST">
+            <label>Email</label>
+            {{!-- add name - (email, username ...) --}}
+            <input type="text" name="email" placeholder="Email..">
+            <label>Password</label>
+            {{!-- add password --}}
+            <input type="password" name="password" placeholder="Password..">
+            <input type="submit" value="Submit">
+        </form>
+        {{!-- change a href --}}
+        <p>Not have an account? <a href="/register">Register here</a></p>
+    </div>
+</main>
