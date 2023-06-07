@@ -11,6 +11,7 @@ router.get('/catalog', async (req, res) => {
 });
 
 router.get('/create', isAuth, async (req, res) => {
+
     res.render('pets/create');
 });
 
@@ -27,11 +28,16 @@ router.post('/create', isAuth, async (req, res) => {
 
 router.get('/:id/details', isAuth, async (req, res) => {
     const pet = await petsService.getOne(req.params.id);
-
     const isOwner = pet.owner == req.user?._id;
+    let creator;
+    if(pet._id.toString() == req.user._id) {
+        creator = user.username
+        console.log(creator)
+    }
 
-    res.render('pets/details', { pet, isOwner, isAuthenticated })
+    res.render('pets/details', { pet, isOwner, creator })
 });
+
 
 router.get('/:id/edit', isAuth, async (req, res) => {
     try {

@@ -5,7 +5,7 @@
             <!-- Start Pet Photo Post Section -->
             <div class="card">
                 <div class="top">
-                    {{#if isOwner}}
+                    
                     <!-- Start User Details and Image Location Section -->
                     <div class="userDetails">
 
@@ -24,14 +24,14 @@
                             <!-- Link to User Profile Details Page -->
                             <p>
                                 <!-- User's username -->
-                                {{user.username}}
+                                {{creator}}
                             </p>
                             <!-- photo's location -->
                             <span>{{pet.location}}</span>
-
+                            {{#if isOwner}}
                             <!-- IF the viewer is the creator of the photo -->
                             <div class="edit-delete-btns">
-
+                                
                                 <!-- Edit Pet Photo -->
                                 <a href="/pets/{{pet._id}}/edit">
                                     <img class="edit-img" src="/static/images/edit-pen-icon-6.jpg" alt="edit button">
@@ -42,11 +42,11 @@
                                     <img class="bin-img" src="/static/images/icon-remove-22.jpg" alt="bin button">
                                 </a>
                             </div>
-
+                            {{/if}} 
                         </h3>
                     </div>
 
-                {{/if}} 
+                
                 </div>
                 <!-- Start Pet Photo -->
                 <div class="imgBx">

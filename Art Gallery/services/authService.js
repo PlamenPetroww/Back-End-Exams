@@ -6,16 +6,15 @@ const { SECRET } = require('../constants');
 
 exports.findByUsername = (username) => User.findOne({ username });
 
-exports.findByEmail = (email) => User.findOne({ email });
+//exports.findByEmail = (email) => User.findOne({ email });
 
-exports.register = async (username, email, password, repeatPassword) => {
+exports.register = async (username, password, repeatPassword, address) => {
     if (password !== repeatPassword) {
         throw new Error('Password missmatch!');
     }
     // TODO: check if user or email exists
     const existingUser = await User.findOne({
         $or: [
-            { email },
             { username },
         ]
     });
@@ -30,27 +29,26 @@ exports.register = async (username, email, password, repeatPassword) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    await User.create({ username, email, password: hashedPassword });
+    await User.create({ username, password: hashedPassword, address });
 
-    return this.login(email, password);
+    return this.login(username, password);
 };
 
-exports.login = async (email, password) => {
+exports.login = async (username, password) => {
     // User exists
-    const user = await this.findByEmail(email);
+    const user = await this.findByUsername(username);
     if (!user) {
-        throw new Error('Invalid email or password');
+        throw new Error('Invalid username or password');
     }
     // Password is valid
     const isValid = await bcrypt.compare(password, user.password);
     if (!isValid) {
-        throw new Error('Invalid email or password');
+        throw new Error('Invalid username or password');
     }
 
     // Generate token
     const payload = {
         _id: user._id,
-        email,
         username: user.username,
     };
     const token = await jwt.sign(payload, SECRET);

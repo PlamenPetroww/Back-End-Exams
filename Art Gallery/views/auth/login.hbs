@@ -1,78 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
+<main>
 
-<head>
-    <meta charset="UTF-8">
-    <title>Login Page</title>
+    <section id="login-container">
 
-    <!-- Do not forget to change the path to the css file -->
-    <link rel="stylesheet" href="./style/css/style.css">
-</head>
-
-<body>
-
-    <div id="box">
-
-        <!-- In case of error, you should display div with class "error-box" -->
-        <!-- You can choose to display the first error or all of them (error message/s in your opinion) -->
-        <!--<div class="error-box">
-            <p>Error</p>
-        </div>-->
-
-        <nav>
-
+        <div class="container">
             <!-- Do not forget to change the path to the image -->
-            <img src="./style/img/art-logo.png" alt="logo">
-            <a href="#">ArtGallery</a>
+            <img src="./static/img/slider.jpg" alt="image">
 
-            <ul class="menu">
-                <li><a href="#">Gallery</a></li>
-                <!-- Logged users -->
-                <li><a href="#">Create Publication</a></li>
-                <li><a href="#">Profile</a></li>
-                <li><a href="#">Logout</a></li>
-                <!-- Guest users -->
-                <li><a href="#">Login</a></li>
-                <li><a href="#">Register</a></li>
-            </ul>
+            <form method="POST" class="container-text">
+                <h2>Login</h2>
+                <p>Welcome, see the new masterpieces!</p>
 
-        </nav>
+                <label for="username">Username:</label>
+                <input type="text" id="username" placeholder="ivan_00" name="username">
 
-        <main>
+                <label for="password">Password:</label>
+                <input type="password" id="password" placeholder="*****" name="password">
 
-            <section id="login-container">
-
-                <div class="container">
-                    <!-- Do not forget to change the path to the image -->
-                    <img src="./style/img/slider.jpg" alt="image">
-
-                    <form action="#" method="" class="container-text">
-                        <h2>Login</h2>
-                        <p>Welcome, see the new masterpieces!</p>
-
-                        <label for="username">Username:</label>
-                        <input type="text" id="username" placeholder="ivan_00" name="">
-
-                        <label for="password">Password:</label>
-                        <input type="password" id="password" placeholder="*****" name="">
-
-                        <button class="login-btn">Login</button>
-                        <div class="card-no-account">
-                            <p>Don't have an account? <a href="#">Sign up</a>.</p>
-                        </div>
-
-                    </form>
+                <button class="login-btn">Login</button>
+                <div class="card-no-account">
+                    <p>Don't have an account? <a href="/register">Sign up</a>.</p>
                 </div>
 
-            </section>
+            </form>
+        </div>
 
-        </main>
+    </section>
 
-        <footer>
-            © Js Back-End Retake Exam 2021
-        </footer>
-    </div>
-
-</body>
-
-</html>
+</main>

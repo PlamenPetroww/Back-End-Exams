@@ -3,46 +3,57 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page - Crypto Web</title>
-    <link rel="stylesheet" href="/static/css/styles.css">
+    <title>Home Page</title>
+
+    <!-- Do not forget to change the path to the css file -->
+    <link rel="stylesheet" href="/static/css/style.css">
 </head>
 
 <body>
-    <header class="header">
+
+    <div id="box">
+
+        {{!-- <div class="error-box">
+            <p>{{error}}</p>
+        </div> --}}
+
         <nav>
-            <img src="/static/images/logo.png" class="logo">
-            <ul>
-                {{!-- Change navigation with new navigate --}}
-                <li><a href="/">Home</a></li>
-                <li><a href="/crypto/catalog">All Crypto</a></li>
+
+            <!-- Do not forget to change the path to the image -->
+            <img src="/static/img/art-logo.png" alt="logo">
+            <a href="/">ArtGallery</a>
+
+            <ul class="menu">
+                <li><a href="/art/gallery">Gallery</a></li>
+                <!-- Logged users -->
                 {{#if isAuthenticated}}
-                <li><a href="/crypto/search">Search</a></li>
-                <li><a href="/crypto/create">Create Offer</a></li>
+                <li><a href="/art/create">Create Publication</a></li>
+                <li><a href="#">Profile</a></li>
                 <li><a href="/logout">Logout</a></li>
+                <!-- Guest users -->
                 {{else}}
                 <li><a href="/login">Login</a></li>
                 <li><a href="/register">Register</a></li>
                 {{/if}}
             </ul>
+
         </nav>
-    </header>
-
-    {{#if error}}
-    <div>
-        <div class="errorContainer">
-            <p>{{error}}</p>
+        {{#if error}}
+        <div>
+            <div class="errorContainer">
+                <p>{{error}}</p>
+            </div>
         </div>
+        {{/if}}
+
+        {{{body}}}
+
+        <footer>
+            © Js Back-End Retake Exam 2021
+        </footer>
     </div>
-    {{/if}}
-
-    {{{body}}}
-
-    <footer>
-        <p>Back-End 2022</p>
-    </footer>
-
 </body>
+
+</html>
 
 </html>

@@ -1,89 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
+<main>
 
-<head>
-    <meta charset="UTF-8">
-    <title>Home Page</title>
+    <section id="home-page">
+        <article class="auto-content">
+            <h1>NEWS OF OUR</h1>
+            <h2>ART GALLERY</h2>
+        </article>
+    </section>
 
-    <!-- Do not forget to change the path to the css file -->
-    <link rel="stylesheet" href="/static/css/styles.css">
-</head>
+    <section id="home-page-content">
+        <h1>Statistics of shared publication</h1>
+        <article class="home-page-content-publications">
 
-<body>
+            <!--If there are publications in the database, show the following view for each created publication-->
+            <article class="content-publication">
+                <h1>Title: Spring in the garden</h1>
 
-    <div id="box">
+                <!--If no one has shared the post yet, the number should be zero -->
+                <p>Number of people shared the publication: 0</p>
+                <a href="#" class="image-details">View publication</a>
+            </article>
 
-        <div class="error-box">
-            <p>{{error}}</p>
-        </div>
+            <article class="content-publication">
+                <h1>Title: Painting is everything</h1>
 
-        <nav>
+                <!--If no one has shared the post yet, the number should be zero -->
+                <!--<p>Number of people shared the publication: 0</p>-->
 
-            <!-- Do not forget to change the path to the image -->
-            <img src="./style/img/art-logo.png" alt="logo">
-            <a href="#">ArtGallery</a>
+                <!--Otherwise, show the number -->
+                <p>Number of people shared the publication: 2</p>
+                <a href="#" class="image-details">View publication</a>
+            </article>
 
-            <ul class="menu">
-                <li><a href="/">Gallery</a></li>
-                <!-- Logged users -->
-                <li><a href="#">Create Publication</a></li>
-                <li><a href="#">Profile</a></li>
-                <li><a href="/logout">Logout</a></li>
-                <!-- Guest users -->
-                <li><a href="/login">Login</a></li>
-                <li><a href="/register">Register</a></li>
-            </ul>
-
-        </nav>
-
-        <main>
-
-            <section id="home-page">
-                <article class="auto-content">
-                    <h1>NEWS OF OUR</h1>
-                    <h2>ART GALLERY</h2>
-                </article>
-            </section>
-
-            <section id="home-page-content">
-                <h1>Statistics of shared publication</h1>
-                <article class="home-page-content-publications">
-
-                    <!--If there are publications in the database, show the following view for each created publication-->
-                    <article class="content-publication">
-                        <h1>Title: Spring in the garden</h1>
-
-                        <!--If no one has shared the post yet, the number should be zero -->
-                        <p>Number of people shared the publication: 0</p>
-                        <a href="#" class="image-details">View publication</a>
-                    </article>
-
-                    <article class="content-publication">
-                        <h1>Title: Painting is everything</h1>
-
-                        <!--If no one has shared the post yet, the number should be zero -->
-                        <!--<p>Number of people shared the publication: 0</p>-->
-
-                        <!--Otherwise, show the number -->
-                        <p>Number of people shared the publication: 2</p>
-                        <a href="#" class="image-details">View publication</a>
-                    </article>
-
-                    <!--If there are no publications yet, show:-->
-                    <!--<article class="no-publication">
+            <!--If there are no publications yet, show:-->
+            <!--<article class="no-publication">
                         <h1>There are no publications yet.</h1>
                         <a href="#" class="view-gallery">View Gallery</a>
                     </article>-->
-                </article>
+        </article>
 
-            </section>
+    </section>
 
-        </main>
-
-        <footer>
-            © Js Back-End Retake Exam 2021
-        </footer>
-    </div>
-</body>
-
-</html>
+</main>

@@ -10,10 +10,10 @@ router.get('/login', (req, res) => {
 
 router.post('/login', async (req, res) => {
     // check or email im loginPage, or username is in loginPage or whatever
-    const { email, password } = req.body;
+    const { username, password } = req.body;
 
     try {
-        const token = await authService.login(email, password);
+        const token = await authService.login(username, password);
         res.cookie('auth', token);
         // TODO: redirect to ...
         res.redirect('/');
@@ -28,11 +28,11 @@ router.get('/register', (req, res) => {
 
 router.post('/register', async (req, res) => {
     /* check im registerPage for username, email, password, repeatPassword */
-    const { username, email, password, repeatPassword } = req.body;
+    const { username, password, repeatPassword, address } = req.body;
 
     try {
         /* when i have authService i can go to authSerice.register */
-        const token = await authService.register(username, email, password, repeatPassword);
+        const token = await authService.register(username, password, repeatPassword, address);
 
         res.cookie('auth', token);
         // TODO: redirect to ...
