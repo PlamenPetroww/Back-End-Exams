@@ -1,22 +1,25 @@
 const mongoose = require('mongoose');
 
-const myPublicationSchema = new mongoose.Schema({
+const publicationSchema = new mongoose.Schema({
 
     title: {
         type: String,
         required: true,
     },
     paintingTechnique: {
-        tpye: String,
+        type: String,
         required: true,
     },
-    artPitcure: {
+    artPicture: {
         type: String,
         required: true,
     },
     certificate: {
         type: String,
-        enum: ['Yes', 'No'],
+        enum: {
+            values: ['Yes', 'No'],
+            messages: 'Invalid option!',
+        },
         required: true,
     },
     author: {
@@ -25,10 +28,14 @@ const myPublicationSchema = new mongoose.Schema({
     },
     userPublications: {
         type: mongoose.Types.ObjectId,
-        red: 'User',
+        ref: 'User',
+    },
+    userCount: {
+        type: Number,
+        default: 0,
     }
 });
 
-const Publication = mongoose.model('Publication', myPublicationSchema);
+const Publication = mongoose.model('Publication', publicationSchema);
 
 module.exports = Publication;
