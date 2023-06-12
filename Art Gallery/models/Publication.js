@@ -4,15 +4,19 @@ const publicationSchema = new mongoose.Schema({
 
     title: {
         type: String,
-        required: true,
+        minLength: [6, 'The title must be at least 6 characters'],
+        required: [true, 'Please write the Title name'],
     },
     paintingTechnique: {
         type: String,
+        maxLength: [15, 'The painting technique must be max 15 characters'],
         required: true,
     },
     artPicture: {
         type: String,
         required: true,
+        validate: /^https?:\/\//,
+        message: 'Invalid URL!',
     },
     certificate: {
         type: String,
@@ -26,14 +30,10 @@ const publicationSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: 'User',
     },
-    userPublications: {
+    usersShared: [{
         type: mongoose.Types.ObjectId,
         ref: 'User',
-    },
-    userCount: {
-        type: Number,
-        default: 0,
-    }
+    }]
 });
 
 const Publication = mongoose.model('Publication', publicationSchema);

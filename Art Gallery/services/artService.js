@@ -4,8 +4,12 @@ exports.create = (ownerId, artData) => Publication.create({ ...artData, author: 
 
 exports.getAll = () => Publication.find({}).lean();
 
-exports.getOne = (publicationId) => Publication.findById(publicationId).lean();
+exports.getOne = (id) => Publication.findById(id);
+
+exports.getOneDetailed = (publicationId) => Publication.findById(publicationId).populate('author');
 
 exports.getById = (id) => Publication.findById(id).lean();
 
 exports.edit = (id, publicData) => Publication.findByIdAndUpdate(id, publicData, { runValidators: true });
+
+exports.delete = (id) => Publication.findByIdAndDelete(id);

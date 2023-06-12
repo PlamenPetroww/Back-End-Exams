@@ -19,23 +19,28 @@ router.post('/create', isAuth, async (req, res) => {
 
     try {
         await artService.create(req.user._id, artData);
-        res.redirect('/');
+        res.redirect('/art/gallery');
     } catch (error) {
-        return res.render('art/gallery', { body: artData, error: getErrorMessage(error) });
+        res.render('art/create', { error: getErrorMessage(error), artData });
     }
 });
 
-router.get('/:id/details', async (req, res) => {
-    const gallery = await artService.getById(req.params.id);
-    const isAuthor = gallery.author == req.user?._id;
+router.get('/:publicationId/details', async (req, res) => {
+    const gallery = await artService.getOneDetailed(req.params.publicationId).lean();
 
-    res.render('art/details', { gallery, isAuthor })
+    const isAuthor = gallery.author._id == req.user._id;
+    const usersSharedIds = gallery.usersShared.map(user => user._id.toString());
+    const isShared = usersSharedIds.includes(req.user._id.toString());
+
+    console.log(isShared)
+
+    res.render('art/details', { ...gallery, isAuthor, isShared })
 });
 
 router.get('/:id/edit', isAuth, async (req, res) => {
-    const gallery = await artService.getOne(req.params.id);
 
     try {
+        const gallery = await artService.getOne(req.params.id).lean();
         res.render('art/edit', { gallery });
     } catch (error) {
         res.render('art/edit', { error: getErrorMessage(error) });
@@ -48,9 +53,28 @@ router.post('/:id/edit', isAuth, async (req, res) => {
         const publication = await artService.edit(req.params.id, publicData)
         res.redirect(`/art/${req.params.id}/details`,);
     } catch (error) {
-        const publication = await artService.getOne(req.params.id);
+        const publication = await artService.getOne(req.params.id).lean();
         res.render('art/edit', { publicData: publicData, error: getErrorMessage(error), publication: publication });
     }
+});
+
+router.get('/:id/delete', isAuth, async (req, res) => {
+    try {
+        await artService.delete(req.params.id);
+    } catch (error) {
+        return res.status(400).render({ error: getErrorMessage(error) })
+    }
+    return res.redirect('/art/gallery');
+});
+
+router.get('/:id/share', isAuth, async (req, res) => {
+    const publication = await artService.getOne(req.params.id);
+
+    publication.usersShared.push(req.user._id);
+
+    await publication.save();
+
+    res.redirect('/');
 });
 
 module.exports = router;
