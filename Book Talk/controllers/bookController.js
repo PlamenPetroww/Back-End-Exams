@@ -24,11 +24,11 @@ router.get('/catalog', async (req, res) => {
     res.render('book/catalog', { book })
 });
 
-router.get('/:id/details', async (req, res) => {
+router.get('/:bookId/details', async (req, res) => {
 
-    const book = await bookService.getOneDetailed(req.params.id).lean();
+    const book = await bookService.getOneDetailed(req.params.bookId).lean();
 
-    const isAuthor = book.author?.toString() === req.user._id;
+    const isAuthor = book.author?.toString() == req.user._id;
 
     res.render('book/details', { ...book, isAuthor })
 });

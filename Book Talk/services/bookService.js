@@ -4,6 +4,6 @@ exports.create = (ownerId, bookData) => Book.create({ ...bookData, author: owner
 
 exports.getAll = () => Book.find({}).lean();
 
-exports.getOne = (id) => Book.findById(id);
+exports.getOne = (id) => Book.findById  (id);
 
 exports.getOneDetailed = (bookId) => Book.findById(bookId).populate('author');

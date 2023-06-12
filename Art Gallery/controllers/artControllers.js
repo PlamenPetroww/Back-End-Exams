@@ -36,8 +36,6 @@ router.get('/:publicationId/details', async (req, res) => {
     const usersSharedIds = gallery.usersShared.map(user => user._id.toString());
     const isShared = usersSharedIds.includes(req.user._id.toString());
 
-    console.log(isShared)
-
     res.render('art/details', { ...gallery, isAuthor, isShared })
 });
 
