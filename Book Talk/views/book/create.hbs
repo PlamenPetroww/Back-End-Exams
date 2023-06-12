@@ -1,19 +1,18 @@
 <section class="create-form-container">
-
-    <form action="">
+    <form method="POST">
         <h3>Create Book Review</h3>
         <label>Title</label>
-        <input type="text" name="" class="box" id="">
+        <input type="text" name="title" value="{{bookData.title}}" class="box" id="">
         <label>Author</label>
-        <input type="text" name="" class="box" id="">
+        <input type="text" name="author" value="{{bookData.author}}" class="box" id="">
         <label>Genre</label>
-        <input type="text" name="" class="box" id="">
+        <input type="text" name="genre" value="{{bookData.genre}}" class="box" id="">
         <label>Stars</label>
-        <input type="number" name="" class="box" id="">
+        <input type="number" name="stars" value="{{bookData.stars}}" class="box" id="">
         <label>Image</label>
-        <input type="text" name="" class="box" id="">
+        <input type="text" name="image" value="{{bookData.image}}" class="box" id="">
         <label>Review</label>
-        <textarea class="box" name=""></textarea>
+        <textarea class="box" name="bookReview">{{bookData.bookReview}}</textarea>
         <input type="submit" value="Create" class="btn">
     </form>
 </section>

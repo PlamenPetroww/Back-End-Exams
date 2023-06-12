@@ -13,10 +13,8 @@ const bookSchema = new mongoose.Schema({
     },
     image: {
         type: String,
-        enum: {
-            values: ['Yes', 'No'],
-            messages: 'Invalid option!',
-        },
+        validate: /^https?:\/\//,
+        message: 'Invalid URL!',
         required: true,
     },
     bookReview: {
@@ -29,7 +27,7 @@ const bookSchema = new mongoose.Schema({
         minLength: [3, 'The Genre must be at least 3 charachters'],
         required: true,
     },
-    start: {
+    stars: {
         type: Number,
         min: 1,
         max: 5,
