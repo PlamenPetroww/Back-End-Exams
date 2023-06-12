@@ -75,8 +75,8 @@ router.post('/:id/edit', isAuth, async (req, res) => {
         res.redirect(`/gaming/${req.params.id}/details`);
     } catch (error) {
         const game = await gameService.getOne(req.params.id);
-    const selectedPlatforms = getSelectPlatform(game.platform);
-        res.render('gaming/edit', { gameData: gameData, error: getErrorMessage(error), game: game, selectedPlatforms});
+        const selectedPlatforms = getSelectPlatform(game.platform);
+        res.render('gaming/edit', { gameData: gameData, error: getErrorMessage(error), game: game, selectedPlatforms });
     }
 
 });
@@ -84,8 +84,8 @@ router.post('/:id/edit', isAuth, async (req, res) => {
 router.get('/:id/delete', isAuth, async (req, res) => {
     try {
         await gameService.delete(req.params.id);
-    } catch(error) {
-        return res.status(400).render({error: getErrorMessage(error)});
+    } catch (error) {
+        return res.status(400).render({ error: getErrorMessage(error) });
     }
     res.redirect('/')
 });

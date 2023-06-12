@@ -32,4 +32,25 @@ router.get('/:id/details', async (req, res) => {
     res.render('art/details', { gallery, isAuthor })
 });
 
+router.get('/:id/edit', isAuth, async (req, res) => {
+    const gallery = await artService.getOne(req.params.id);
+
+    try {
+        res.render('art/edit', { gallery });
+    } catch (error) {
+        res.render('art/edit', { error: getErrorMessage(error) });
+    }
+});
+
+router.post('/:id/edit', isAuth, async (req, res) => {
+    const publicData = req.body;
+    try {
+        const publication = await artService.edit(req.params.id, publicData)
+        res.redirect(`/art/${req.params.id}/details`,);
+    } catch (error) {
+        const publication = await artService.getOne(req.params.id);
+        res.render('art/edit', { publicData: publicData, error: getErrorMessage(error), publication: publication });
+    }
+});
+
 module.exports = router;

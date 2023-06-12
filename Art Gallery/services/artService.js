@@ -8,4 +8,4 @@ exports.getOne = (publicationId) => Publication.findById(publicationId).lean();
 
 exports.getById = (id) => Publication.findById(id).lean();
 
-exports.edit = (id, publicationId) => Publication.findByIdAndUpdate(id, publicationId, { runValidators: true });
+exports.edit = (id, publicData) => Publication.findByIdAndUpdate(id, publicData, { runValidators: true });
