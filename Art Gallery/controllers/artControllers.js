@@ -1,7 +1,9 @@
 const router = require('express').Router();
 const { isAuth } = require('../middlewares/authMiddleware');
 const artService = require('../services/artService');
+const userService = require('../services/userService');
 const { getErrorMessage } = require('../utils/errorUtils');
+
 
 
 router.get('/gallery', async (req, res) => {
@@ -15,10 +17,12 @@ router.get('/create', isAuth, (req, res) => {
 });
 
 router.post('/create', isAuth, async (req, res) => {
-    const artData = req.body;
+    //const artData = req.body;
+    const artData = {...req.body, author: req.user._id}
 
     try {
-        await artService.create(req.user._id, artData);
+        const publication = await artService.create(req.user._id, artData);
+        await userService.addPublication(req.user._id, publication._id)
         res.redirect('/art/gallery');
     } catch (error) {
         res.render('art/create', { error: getErrorMessage(error), artData });
@@ -69,7 +73,6 @@ router.get('/:id/delete', isAuth, async (req, res) => {
 
 router.get('/:id/share', isAuth, async (req, res) => {
     const publication = await artService.getOne(req.params.id);
-
     publication.usersShared.push(req.user._id);
 
     await publication.save();

@@ -19,7 +19,15 @@ const userSchema = new mongoose.Schema({
         type: String,
         minLength: [20, 'The adress must be min 20 characters long!'],
         required: true,
-    }
+    },
+    publications: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'Publication',
+    }],
+    shares: [{
+            type: mongoose.Types.ObjectId,
+            ref: 'Publication',
+        }],
 });
 
 const User = mongoose.model('User', userSchema);
