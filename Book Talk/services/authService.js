@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('../lib/jsonwebtoken');
 const { SECRET } = require('../constants');
 
-exports.findByUsername = (username) => User.findOne({ username });
+//exports.findByUsername = (username) => User.findOne({ username });
 
 exports.findByEmail = (email) => User.findOne({ email });
 
@@ -24,7 +24,7 @@ exports.register = async (username, email, password, repeatPassword) => {
     }
 
     // TODO: Validate password
-    if(password.length < 4) {
+    if(password.length < 3) {
         throw new Error('Password too short!');
     }
 

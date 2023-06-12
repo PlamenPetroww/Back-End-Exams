@@ -21,6 +21,6 @@ app.use(authentication);
 app.use(routes);
 
 //TODO: change database name
-mongoose.connect(`mongodb://127.0.0.1:27017/crypto`);
+mongoose.connect(`mongodb://127.0.0.1:27017/book`);
 
 app.listen(3000, () => console.log(`Server is running ot port 3000...`));
