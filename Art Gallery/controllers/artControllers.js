@@ -26,10 +26,9 @@ router.post('/create', isAuth, async (req, res) => {
 });
 
 router.get('/:id/details', async (req, res) => {
-    const gallery = await artService.getbyId(req.params.id);
+    const gallery = await artService.getById(req.params.id);
     const isAuthor = gallery.author == req.user?._id;
-    gallery.isPublicated = gallery.users.map(x => x.toString()).includes(req.user._id.toString());
-    
+
     res.render('art/details', { gallery, isAuthor })
 });
 

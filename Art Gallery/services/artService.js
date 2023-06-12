@@ -1,16 +1,11 @@
 const Publication = require('../models/Publication');
 
-exports.create = (ownerId, artData) => Publication.create({...artData, author: ownerId});
+exports.create = (ownerId, artData) => Publication.create({ ...artData, author: ownerId });
 
 exports.getAll = () => Publication.find({}).lean();
 
-exports.getOne = (id) => Publication.findById(id).lean();
+exports.getOne = (publicationId) => Publication.findById(publicationId).lean();
 
-exports.publicatedUser = async (pictureId, userId) => {
-    const existing = await Publication.findById(pictureId);
-    existing.users.puh(userId),
-    existing.userCount++;
-    return existing.save();
-};
+exports.getById = (id) => Publication.findById(id).lean();
 
-exports.getbyId = (id) => Publication.findById(id).lean();
+exports.edit = (id, publicationId) => Publication.findByIdAndUpdate(id, publicationId, { runValidators: true });
