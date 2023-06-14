@@ -14,7 +14,11 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-    }
+    },
+    shares: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'book',
+    }],
 });
 
 const User = mongoose.model('User', userSchema);
