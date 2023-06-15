@@ -122,7 +122,7 @@
                 {{#unless isOwner}}
                 <div class="addComments">
                     <!-- Start Add Comments Form -->
-                    <form method="POST" action="/pet/">
+                    <form method="POST" action="/pet/{{pet_id}}/comments">
                         <textarea id="comment-textarea" name="message" cols="40" rows="10"
                             placeholder="Add comment..."></textarea>
                         <!-- Post Comments Button -->
