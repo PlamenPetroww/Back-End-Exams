@@ -14,7 +14,7 @@ const auctionSchema = new mongoose.Schema ({
     category: {
         type: String,
         required: true,
-        enum: ['Vehicles, Real Estate, Electronics, Furniture, Other'],
+        enum: ['Vehicles', 'Real Estate', 'Electronics','Furniture', 'Other'],
     },
     image: {
         type: String,
@@ -23,6 +23,10 @@ const auctionSchema = new mongoose.Schema ({
         type: Number,
         min: 0,
         required: true,
+    },
+    owner: {
+        type: mongoose.Types.ObjectId,
+        ref: 'User',
     },
     author: {
         type: mongoose.Types.ObjectId,

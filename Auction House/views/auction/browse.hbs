@@ -1,13 +1,10 @@
 <main>
 
     <!-- In case of error, display the following div-->
-    <!--
 
             <div class="error-box">
-                <p>Show each error in a separate paragraph</p>
+                <p>{{error}}</p>
             </div>
-
-            -->
 
     <!-- Browse Page -->
     <section id="catalog-section" class="spaced">
@@ -16,57 +13,21 @@
 
         <!-- List of available auctions -->
         <ul class="catalog cards">
-            <li class="item">
-                <header class="pad-med">
-                    <h2>Fishing Boat</h2>
-                </header>
-
-                <div class="align-center">
-                    <img class="img-thumb" src="/static/assets/boat.jpg">
-                </div>
-
-                <footer class="align-center pad-med">
-                    <p>Current price: <strong>$5000</strong></p>
-                    <a class="action" href="#">See details</a>
-                </footer>
-            </li>
-            <li class="item">
-                <header class="pad-med">
-                    <h2>Wardrobe</h2>
-                </header>
-
-                <div class="align-center">
-                    <img class="img-thumb" src="/static/assets/wardrobe.jpg">
-                </div>
-
-                <footer class="align-center pad-med">
-                    <p>Current price: <strong>$150</strong></p>
-                    <a class="action" href="#">See details</a>
-                </footer>
-            </li>
-            <li class="item">
-                <header class="pad-med">
-                    <h2>Record Player</h2>
-                </header>
-
-                <div class="align-center">
-                    <img class="img-thumb" src="/static/assets/player.jpg">
-                </div>
-
-                <footer class="align-center pad-med">
-                    <p>Current price: <strong>$400</strong></p>
-                    <a class="action" href="#">See details</a>
-                </footer>
-            </li>
+            {{#if offer}}
+            {{#each offer}}
+            {{>offer}}
+            {{/each}}
         </ul>
 
         <!-- If there are no auctions to display -->
+        {{else}}
         <div class="item pad-large align-center">
             <p>Nothing has been listed yet. Be the first!</p>
             <div>
                 <a class="action" href="#">Publish Auction</a>
             </div>
         </div>
+        {{/if}}
 
     </section>
 
