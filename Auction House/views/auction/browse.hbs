@@ -1,7 +1,4 @@
 <main>
-
-    <!-- In case of error, display the following div-->
-
             <div class="error-box">
                 <p>{{error}}</p>
             </div>
@@ -13,9 +10,9 @@
 
         <!-- List of available auctions -->
         <ul class="catalog cards">
-            {{#if offer}}
-            {{#each offer}}
-            {{>offer}}
+            {{#if auctions}}
+            {{#each auctions}}
+                {{>auctions}}
             {{/each}}
         </ul>
 
@@ -24,7 +21,7 @@
         <div class="item pad-large align-center">
             <p>Nothing has been listed yet. Be the first!</p>
             <div>
-                <a class="action" href="#">Publish Auction</a>
+                <a class="action" href="/auction/create">Publish Auction</a>
             </div>
         </div>
         {{/if}}
