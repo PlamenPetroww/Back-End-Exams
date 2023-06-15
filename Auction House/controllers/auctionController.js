@@ -25,11 +25,26 @@ router.post('/create', isAuth, async (req, res) => {
     }
 });
 
-router.get('/:id/details', isAuth, async (req, res) => {
+
+router.get('/:id/details', async (req, res) => {
     const offer = await auctionService.getOne(req.params.id);
+    const isOwner = offer.author.toString() === req.user?._id.toString();
+    let creator;
+    if (isOwner) {
+        try {
+            res.render('auction/details-owner', { offer, isOwner });
+        } catch (error) {
+            return res.status(400).render('auction/404', { error: getErrorMessage(error) });
+        }
+    }
 
-    res.render('auction/details', { offer });
-}),
+    try {
+        res.render('auction/details', { offer });
+    } catch (error) {
+        return res.render('auction/details', { offer });
+    }
+
+});
 
 
-    module.exports = router;
+module.exports = router;
