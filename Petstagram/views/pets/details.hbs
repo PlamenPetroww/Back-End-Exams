@@ -118,16 +118,19 @@
                         </div>
                     </div>
                 </div>
-                
+                {{#if isAuthenticated}}
+                {{#unless isOwner}}
                 <div class="addComments">
                     <!-- Start Add Comments Form -->
-                    <form method="#" action="#">
-                        <textarea id="comment-textarea" name="" cols="40" rows="10"
+                    <form method="POST" action="/pet/">
+                        <textarea id="comment-textarea" name="message" cols="40" rows="10"
                             placeholder="Add comment..."></textarea>
                         <!-- Post Comments Button -->
                         <button type="submit">Post</button>
                     </form>
                 </div>
+                {{/unless}}
+                {{/if}}
             </div>
         </div>
     </div>

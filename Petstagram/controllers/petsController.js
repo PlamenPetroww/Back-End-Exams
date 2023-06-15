@@ -30,7 +30,7 @@ router.get('/:id/details', isAuth, async (req, res) => {
     const pet = await petsService.getOne(req.params.id);
     const isOwner = pet.owner == req.user?._id;
     let creator;
-    if(pet._id.toString() == req.user._id) {
+    if (pet._id.toString() == req.user._id) {
         creator = user.username
         console.log(creator)
     }
@@ -68,4 +68,16 @@ router.get('/:id/delete', isAuth, async (req, res) => {
     }
     res.redirect('/pets/catalog');
 });
+
+router.post('/:photoId/comments', async (req, res) => {
+    const photoId = req.params.photoId;
+    const { message } = req.body;
+    const userId = req.user._id;
+
+    await petsService.addComment(photoId, { userId, message });
+
+    res.redirect(`/pets/${req.params.photoId}/details`);
+    //res.redirect(`/pets/${photoId}/details`);
+});
+
 module.exports = router;
