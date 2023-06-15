@@ -23,8 +23,9 @@
                         <a href="#">Browse</a>
                     </li>
                     <!-- User actions -->
+                    {{#if isAuthenticated}}
                     <li class="user">
-                        <a href="#">Publish</a>
+                        <a href="/auction/create">Publish</a>
                     </li>
 
                     <!-- Bonus action -->
@@ -38,12 +39,14 @@
                         <a href="/logout">Logout</a>
                     </li>
                     <!-- Guest actions -->
+                    {{else}}
                     <li class="guest">
                         <a href="/register">Register</a>
                     </li>
                     <li class="guest">
                         <a href="/login">Login</a>
                     </li>
+                    {{/if}}
                 </ul>
             </nav>
         </header>

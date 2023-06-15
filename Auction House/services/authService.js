@@ -23,7 +23,7 @@ exports.register = async (email, firstName, lastName, password, repeatPassword) 
     }
 
     // TODO: Validate password
-    if(password.length < 4) {
+    if(password.length < 5) {
         throw new Error('Password too short!');
     }
 
@@ -50,7 +50,6 @@ exports.login = async (email, password) => {
     const payload = {
         _id: user._id,
         email,
-        username: user.username,
     };
     const token = await jwt.sign(payload, SECRET);
 
