@@ -33,6 +33,7 @@ router.get('/:id/details', async (req, res) => {
     const offer = await auctionService.getOne(req.params.id);
     const isOwner = offer.author?.toString() === req.user?._id.toString();
 
+
     try {
         if (isOwner) {
             res.render('auction/details-owner', { offer, isOwner });
@@ -44,19 +45,30 @@ router.get('/:id/details', async (req, res) => {
     }
 });
 
-router.get('/:id/buy', isAuth, async (req, res)=> {
+const getOffer = require('../services/auctionService');
+
+router.post('/:id/buy', async (req, res) => {
     const offerId = req.params.id;
     const userId = req.user._id;
-
-    const offer = await Auction.getById(offerId);
-
+    console.log(offerId)
+    const offer = await Auction.findById(offerId);
+    console.log(offer.price)
     const isOwner = offer.author === userId;
 
-    if(!isOwner && !offer.users.includes(userId)) {
-        await auctionService.buy(offerId, userId)
+    if (!isOwner && !offer.bidder.includes(userId)) {
+        await auctionService.getOffer(offerId, userId);
     }
 
-    res.redirect(`auction/${offerId}/details`);
+    res.redirect(`/auction/${offerId}/details`);
+});
+
+router.post('/:id/details', isAuth, async (req, res) => {
+    const { offer } = req.body;
+    const offerId = req.params.id;
+
+    await auctionService.getOffer(offerId, offer);
+
+    res.redirect(`/${id}/details`);
 });
 
 

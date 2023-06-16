@@ -24,8 +24,8 @@
 
                         <!-- If current user can place a bid -->
                         {{#if user}}
-                        <form class="vertical" method="post">
-                            <label><span>Bid amount</span><input type="number" name="bidder"></label>
+                        <form class="vertical" method="post" action="/auction/{{offer._id}}/buy">
+                            <label><span>Bid amount</span><input type="number" name="amount"></label>
                             <input class="action" type="submit" value="Place bid">
                         </form>
 

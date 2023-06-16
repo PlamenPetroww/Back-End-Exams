@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const auctionSchema = new mongoose.Schema ({
+const auctionSchema = new mongoose.Schema({
     title: {
         type: String,
         minLength: [4, 'The title must be at least 4 charatcers long!'],
@@ -14,7 +14,7 @@ const auctionSchema = new mongoose.Schema ({
     category: {
         type: String,
         required: true,
-        enum: ['Vehicles', 'Real Estate', 'Electronics','Furniture', 'Other'],
+        enum: ['Vehicles', 'Real Estate', 'Electronics', 'Furniture', 'Other'],
     },
     image: {
         type: String,
@@ -32,10 +32,11 @@ const auctionSchema = new mongoose.Schema ({
         type: mongoose.Types.ObjectId,
         ref: 'User',
     },
-    bidder: [{
-        type: mongoose.Types.ObjectId,
+    bidder: {
+        type: [mongoose.Types.ObjectId],
         ref: 'User',
-    }],
+        default: [],
+    }
 });
 
 const Auction = mongoose.model('Auction', auctionSchema);
