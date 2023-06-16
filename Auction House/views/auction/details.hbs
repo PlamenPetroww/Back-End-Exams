@@ -25,9 +25,10 @@
                         <!-- If current user can place a bid -->
                         {{#if user}}
                         <form class="vertical" method="post">
-                            <label><span>Bid amount</span><input type="number" name=""></label>
+                            <label><span>Bid amount</span><input type="number" name="bidder"></label>
                             <input class="action" type="submit" value="Place bid">
                         </form>
+
                         {{/if}}
                         <!-- If current user is the bidder -->
                         <div>

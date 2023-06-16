@@ -3,6 +3,7 @@ const auctionService = require('../services/auctionService');
 const { isAuth } = require('../middlewares/authMiddleware');
 const { getErrorMessage } = require('../utils/errorUtils');
 const { categoryMap } = require('../constants');
+const Auction = require('../models/Auction');
 
 router.get('/browse', async (req, res) => {
 
@@ -27,6 +28,7 @@ router.post('/create', isAuth, async (req, res) => {
 });
 
 
+
 router.get('/:id/details', async (req, res) => {
     const offer = await auctionService.getOne(req.params.id);
     const isOwner = offer.author?.toString() === req.user?._id.toString();
@@ -41,6 +43,24 @@ router.get('/:id/details', async (req, res) => {
         res.status(400).render('auction/404', { error: getErrorMessage(error) })
     }
 });
+
+router.get('/:id/buy', isAuth, async (req, res)=> {
+    const offerId = req.params.id;
+    const userId = req.user._id;
+
+    const offer = await Auction.getById(offerId);
+
+    const isOwner = offer.author === userId;
+
+    if(!isOwner && !offer.users.includes(userId)) {
+        await auctionService.buy(offerId, userId)
+    }
+
+    res.redirect(`auction/${offerId}/details`);
+});
+
+
+
 
 router.get('/:id/edit', isAuth, async (req, res) => {
     const bidData = await auctionService.getOne(req.params.id);
@@ -57,13 +77,6 @@ router.get('/:id/edit', isAuth, async (req, res) => {
     }
 });
 
-/* router.post('/:id/edit', isAuth, async (req, res) => {
-    const bidData = req.body;
-    try {
-        const offer = await auctionService.edit(req.params.id, bidData);
-        res.redirect(``)
-    }
-}); */
 
 router.get('/:id/delete', isAuth, async (req, res) => {
     try {
