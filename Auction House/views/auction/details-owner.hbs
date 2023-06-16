@@ -5,8 +5,8 @@
         <h1 class="item">
             Fishing Boat
             <div class="f-right">
-                <a class="action pad-small f-left" href="/auction/{{_id}}/edit">Edit</a>
-                <a class="action pad-small f-left" href="/auction/{{_id}}/delete">Delete</a>
+                <a class="action pad-small f-left" href="/auction/{{offer._id}}/edit">Edit</a>
+                <a class="action pad-small f-left" href="/auction/{{offer._id}}/delete">Delete</a>
             </div>
         </h1>
         <div class="item padded">
@@ -45,7 +45,7 @@
                 </div>
             </div>
 
-            <footer>Listed by Peter Jackson</footer>
+            <footer>Listed by {{creatorName}}</footer>
         </div>
 
     </section>
