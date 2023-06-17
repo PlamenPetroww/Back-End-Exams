@@ -4,6 +4,7 @@ const { isAuth } = require('../middlewares/authMiddleware');
 const { getErrorMessage } = require('../utils/errorUtils');
 const { categoryMap } = require('../constants');
 const Auction = require('../models/Auction');
+const User = require('../models/User');
 
 router.get('/browse', async (req, res) => {
 
@@ -32,34 +33,43 @@ router.post('/create', isAuth, async (req, res) => {
 router.get('/:id/details', async (req, res) => {
     const offer = await auctionService.getOne(req.params.id);
     const isOwner = offer.author?.toString() === req.user?._id.toString();
-
+    const creatorId = offer.author;
+    const creator = await User.findById(creatorId);
+    const creatorFirstName = creator.firstName;
+    const creatorLastName = creator.lastName
 
     try {
         if (isOwner) {
-            res.render('auction/details-owner', { offer, isOwner });
+
+            res.render('auction/details-owner', { offer, isOwner, creatorFirstName, creatorLastName });
         } else {
-            res.render('auction/details', { offer });
+            res.render('auction/details', { offer, creatorFirstName, creatorLastName });
         }
     } catch (error) {
         res.status(400).render('auction/404', { error: getErrorMessage(error) })
     }
 });
 
-const getOffer = require('../services/auctionService');
+
+//const getOffer = require('../services/auctionService');
 
 router.post('/:id/buy', async (req, res) => {
     const offerId = req.params.id;
+    let { amount } = req.body;
+    const offer = await auctionService.getOne(offerId);
     const userId = req.user._id;
-    console.log(offerId)
-    const offer = await Auction.findById(offerId);
-    console.log(offer.price)
-    const isOwner = offer.author === userId;
-
-    if (!isOwner && !offer.bidder.includes(userId)) {
-        await auctionService.getOffer(offerId, userId);
+    amount = Number(amount)
+    try {
+        if (Number(amount) <= offer.price) {
+            const error = [];
+            error.push({ msg: 'This is not the best price. Bid more please' });
+            throw error;
+        }
+        await auctionService.getOffer(offerId, userId, amount);
+        res.redirect(`details/${id}`);
+    } catch (error) {
+        res.render('auction/details', { error: getErrorMessage(error) })
     }
-
-    res.redirect(`/auction/${offerId}/details`);
 });
 
 router.post('/:id/details', isAuth, async (req, res) => {

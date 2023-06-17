@@ -15,5 +15,5 @@ exports.getOffer = async (id, userId) => {
     const existing = await Auction.findById(id);
     existing.bidder.push(userId);
     await existing.save();
-
+    return 
 };
