@@ -1,6 +1,6 @@
 const Pet = require('../models/Pets');
 
-exports.getAll = () => Pet.find({}).lean();
+exports.getAll = () => Pet.find({}).populate('owner').lean();
 
 exports.create = (ownerId, petsData) => Pet.create({ ...petsData, owner: ownerId });
 
