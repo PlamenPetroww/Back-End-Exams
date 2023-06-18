@@ -34,8 +34,10 @@ router.post('/create', isAuth, async (req, res) => {
 router.get('/:id/details', isAuth, async (req, res) => {
     const pet = await petsService.getOne(req.params.id);
     const isOwner = pet.owner?.toString() === req.user?._id.toString();
-
-    res.render('pets/details', { pet, isOwner })
+    const creatorId = pet.owner;
+    const creator = await User.findById(creatorId);
+    const creatorName = creator.username
+    res.render('pets/details', { pet, isOwner, creatorName })
 });
 
 
