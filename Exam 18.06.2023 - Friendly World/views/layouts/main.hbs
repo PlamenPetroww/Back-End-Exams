@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles/styles.css" />
+    <title>Home Page</title>
+</head>
+
+<body>
+
+    <div>
+        <div class="errorContainer">
+            <p>Error</p>
+        </div>
+    </div>
+
+    <div id="wrapper">
+        <header>
+            <!-- Navigation -->
+            <nav>
+                <div>
+                    <a href="/">Home</a>
+                    <a href="/animal/dashboard">Dashboard</a>
+                    <a href="/animal/search">Search</a>
+                </div>
+
+                <!-- Logged-in users -->
+                {{#if isAuthenticated}}
+                <div class="user">
+                    <a href="/animal/create">Add Animal</a>
+                    <a href="/logout">Logout</a>
+                </div>
+
+                <!-- Guest users -->
+                {{else}}
+                <div class="guest">
+                    <a href="/login">Login</a>
+                    <a href="/register">Register</a>
+                </div>
+                {{/if}}
+            </nav>
+        </header>
+
+        {{#if error}}
+    <div>
+        <div class="errorContainer">
+            <p>{{error}}</p>
+        </div>
+    </div>
+    {{/if}}
+
+        {{{body}}}
+
+        <footer>
+            <p>@Friendly World</p>
+        </footer>
+    </div>
+</body>
+
+</html>
+

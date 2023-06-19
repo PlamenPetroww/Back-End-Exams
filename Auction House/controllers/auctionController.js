@@ -32,7 +32,7 @@ router.post('/create', isAuth, async (req, res) => {
 
 router.get('/:id/details', async (req, res) => {
     const offer = await auctionService.getOne(req.params.id);
-    const isOwner = offer.author?.toString() === req.user?._id.toString();
+    const isOwner = offer.author?.toString() == req.user?._id;
     const creatorId = offer.author;
     const creator = await User.findById(creatorId);
     const creatorFirstName = creator.firstName;
