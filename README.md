@@ -14,4 +14,4 @@ bcrypt,
 cookie-parser,
 mongoose.
 
-Die Anwendung kann mit npm start gestartet werden.
+Nachdem das Projekt heruntergeladen wurde, sollten die notwendigen Pakete aus package.json im Terminal mit dem Befehl npm i installiert werden und anschließend kann der Server und die gesamte Anwendung mit dem Befehl npm start gestartet werden.
